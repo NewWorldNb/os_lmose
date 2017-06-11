@@ -1,0 +1,1131 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD init.o
+LOAD lmosemhal_start.o
+LOAD interrupt.o
+LOAD intabtdistr.o
+LOAD halglobal.o
+LOAD halinit.o
+LOAD vector.o
+LOAD platform.o
+LOAD printfk.o
+LOAD div0.krnl
+LOAD _udivsi3.o
+LOAD _umodsi3.o
+LOAD _modsi3.o
+LOAD _divsi3.o
+LOAD cpuctrl.o
+LOAD halmmu.o
+LOAD halmach.o
+LOAD halmm.o
+LOAD halintupt.o
+LOAD haluart.o
+LOAD krlinit.o
+LOAD krlglobal.o
+LOAD krlintupt.o
+LOAD krlsem.o
+LOAD krlwaitlist.o
+LOAD krlmm.o
+LOAD krlpagempol.o
+LOAD krlobjsmpol.o
+LOAD krlsched.o
+LOAD krltime.o
+LOAD krlobjnode.o
+LOAD krlthread.o
+LOAD krldevice.o
+LOAD krlservice.o
+LOAD krlsvemm.o
+LOAD krlsvethread.o
+LOAD krlsveopen.o
+LOAD krlsveclose.o
+LOAD krlsveread.o
+LOAD krlsvewrite.o
+LOAD krlsveioctrl.o
+LOAD krlsvelseek.o
+LOAD krlcpuidle.o
+LOAD task.o
+LOAD drvtick.o
+LOAD drvuart.o
+LOAD drvrtc.o
+LOAD lapimm.o
+LOAD lapithread.o
+LOAD lapiopen.o
+LOAD lapiclose.o
+LOAD lapiread.o
+LOAD lapiwrite.o
+LOAD lapiioctrl.o
+LOAD lapilseek.o
+LOAD lapitime.o
+LOAD libmm.o
+LOAD libthread.o
+LOAD libopen.o
+LOAD libclose.o
+LOAD libread.o
+LOAD libwrite.o
+LOAD libioctrl.o
+LOAD liblseek.o
+LOAD libtime.o
+LOAD printf.o
+LOAD utask.o
+                0x30008000                . = 0x30008000
+                0x30008000                __begin_kernel = .
+                0x30008000                __begin_lmosem_hal_head_text = .
+
+.head.text      0x30008000      0x250
+ *(.head.text)
+ .head.text     0x30008000       0x50 init.o
+                0x30008000                _start
+                0x30008034                lmde
+                0x30008038                tstw
+ .head.text     0x30008050       0x14 lmosemhal_start.o
+                0x30008050                lmosemhal_start
+ .head.text     0x30008064       0x30 halinit.o
+                0x30008064                init_hal
+ .head.text     0x30008094      0x1bc platform.o
+                0x30008094                s3c2440mmu_invalid_dicache
+                0x300080a8                s3c2440mmu_set_domain
+                0x300080b0                s3c2440mmu_set_tblbass
+                0x300080b8                s3c2440mmu_enable
+                0x300080e4                s3c2440vector_init
+                0x30008150                s3c2440vector_copy
+                0x300081bc                s3c2440mmu_init
+                0x30008250                __end_lmosem_hal_head_text = .
+                0x30008250                __begin_lmosem_hal_head_data = .
+
+.head.data
+ *(.head.data)
+                0x30008250                __end_lmosem_hal_head_data = .
+                0x30008250                __begin_lmosem_hal_init = .
+
+.lmosem_hal.init
+ *(.lmosem_hal.init)
+                0x30008250                __end_lmosem_hal_init = .
+                0x30008250                __begin_lmosem_hal_vector = .
+
+.lmosem_hal.vector
+                0x30008250       0x60
+ *(.lmosem_hal.vector)
+ .lmosem_hal.vector
+                0x30008250       0x60 vector.o
+                0x30008250                vector
+                0x300082b0                __end_lmosem_hal_vector = .
+                0x300082b0                __begin_lmosem_hal_intvect = .
+
+.lmosem_hal.intvect
+                0x300082b0      0x180
+ *(.lmosem_hal.intvect)
+ .lmosem_hal.intvect
+                0x300082b0      0x180 interrupt.o
+                0x300082b0                hal_undefins
+                0x300082f0                hal_swi
+                0x30008320                hal_prefabt
+                0x30008360                hal_dataabt
+                0x300083a0                hal_bugdie
+                0x300083a4                hal_irq
+                0x300083e4                hal_frq
+                0x30008430                __end_lmosem_hal_intvect = .
+                0x30008430                __begin_text = .
+
+.text           0x30008430     0x77b4
+ *(.text)
+ .text          0x30008430        0x0 init.o
+ .text          0x30008430        0x0 lmosemhal_start.o
+ .text          0x30008430        0x0 interrupt.o
+ .text          0x30008430      0x60c intabtdistr.o
+                0x30008430                hal_run_intflthandle
+                0x30008494                hal_frq_distr
+                0x300084ac                hal_bugdie_distr
+                0x300084c4                hal_undefins_distr
+                0x300084dc                hal_int_distr
+                0x30008500                hal_lcdint_distr
+                0x30008564                hal_sint_distr
+                0x300085d8                hal_eint_distr
+                0x30008648                hal_irq_distr
+                0x300087b4                hal_dbugint2
+                0x300087e4                hal_dbugint
+                0x30008814                hal_swi_distr
+                0x30008824                hal_dbug_print_reg
+                0x300089a4                hal_dataabt_distr
+                0x300089f0                hal_prefabt_distr
+ .text          0x30008a3c        0x0 halglobal.o
+ .text          0x30008a3c        0x0 halinit.o
+ .text          0x30008a3c        0x0 vector.o
+ .text          0x30008a3c       0x78 platform.o
+                0x30008a3c                init_paltform
+ .text          0x30008ab4      0x1e4 printfk.o
+                0x30008ab4                strcopyk
+                0x30008ad4                numberk
+                0x30008b58                vsprintfk
+                0x30008c10                char_write_uart
+                0x30008c3c                printfk
+ .text          0x30008c98       0x18 div0.krnl
+                0x30008c98                __div0
+ .text          0x30008cb0       0xc8 _udivsi3.o
+                0x30008cb0                __udivsi3
+                0x30008cb0                __aeabi_uidiv
+                0x30008d48                __aeabi_uidivmod
+                0x30008d60                __aeabi_idivmod
+ .text          0x30008d78       0xb4 _umodsi3.o
+                0x30008d78                __umodsi3
+ *fill*         0x30008e2c       0x14 00
+ .text          0x30008e40      0x100 _modsi3.o
+                0x30008e40                __modsi3
+ .text          0x30008f40      0x140 _divsi3.o
+                0x30008f40                __aeabi_idiv
+                0x30008f40                __divsi3
+ .text          0x30009080      0x274 cpuctrl.o
+                0x30009080                hal_disable_fiq
+                0x30009090                hal_enable_fiq
+                0x300090a0                hal_disable_irq
+                0x300090b0                hal_enable_irq
+                0x300090c0                hal_disable_irqfiq
+                0x300090d0                hal_enable_irqfiq
+                0x300090e0                hal_disablefiq_savecpuflg
+                0x30009100                hal_enablefiq_restcpuflg
+                0x3000910c                hal_disableirq_savecpuflg
+                0x3000912c                hal_enableirq_restcpuflg
+                0x30009138                hal_disableirqfiq_savecpuflg
+                0x30009158                hal_enableirqfiq_restcpuflg
+                0x30009164                hal_read_currmodesp
+                0x3000916c                hal_read_cpuflg
+                0x30009174                hal_write_cpuflg
+                0x3000917c                hal_swhmodset_sp_rscurmod
+                0x30009198                hal_read_scpuflg
+                0x300091a0                hal_write_scpuflg
+                0x300091a8                hal_cpumode_switch
+                0x300091c0                hal_cpumodeswitch_retoldmode
+                0x300091dc                hal_io8_read
+                0x300091e8                hal_io16_read
+                0x300091f8                hal_io32_read
+                0x30009200                hal_io8_write
+                0x30009208                hal_io16_write
+                0x30009210                hal_io32_write
+                0x30009218                hal_spinlock_init
+                0x30009224                hal_spinlock_lock
+                0x30009240                hal_spinlock_unlock
+                0x3000924c                hal_spinlock_saveflg_cli
+                0x3000927c                hal_spinunlock_restflg_sti
+                0x30009290                hal_memset
+                0x300092b0                hal_memcpy
+                0x300092d4                hal_retn_cpuid
+                0x300092dc                hal_sysdie
+ .text          0x300092f4       0x4c halmmu.o
+                0x300092f4                hal_disable_cache
+                0x3000930c                cp15_read_c5
+                0x30009314                cp15_read_c6
+                0x3000931c                hal_read_cp15regs
+ .text          0x30009340       0xf4 halmach.o
+                0x30009340                print_mach
+                0x300093b0                mach_t_init
+                0x30009428                init_halmach
+ .text          0x30009434      0xd98 halmm.o
+                0x30009434                cheksum_phyadrspce
+                0x30009500                mapdsc_addto_memlst
+                0x30009560                pmmlist_init
+                0x300095a8                hal_onblksz_findalcfrelst
+                0x30009678                hal_onalfl_findmapdsc
+                0x300096c0                hal_onmapdsc_allcblks
+                0x300097f0                hal_onalcfrel_allocblks
+                0x300098ec                hal_free_findmapdsc
+                0x30009970                hal_onmapdsc_freeblks
+                0x30009a24                hal_onalcfrel_freeblks
+                0x30009b08                onmmapdsc_inkrlram
+                0x30009b64                print_mmapdsc
+                0x30009bac                hal_memfreeblks_core
+                0x30009c40                hal_memfreeblks
+                0x30009c6c                hal_memallocblks_core
+                0x30009d08                hal_memallocblks
+                0x30009d20                test_blkmm
+                0x30009ea0                testblkalloc
+                0x30009f58                alcfrelst_t_init
+                0x30009f98                phymem_t_init
+                0x30009ffc                init_phymem
+                0x3000a024                mmapdsc_t_init
+                0x3000a064                init_core_mmapdsc
+                0x3000a108                init_mmapdsc
+                0x3000a18c                init_halmm
+ .text          0x3000a1cc      0x468 halintupt.o
+                0x3000a1cc                intserdsc_t_init
+                0x3000a204                hal_retn_intfltdsc
+                0x3000a228                hal_intflt_default
+                0x3000a240                hal_retn_intnr
+                0x3000a258                hal_disable_intline
+                0x3000a320                hal_enable_intline
+                0x3000a3e8                hal_clear_srcpnd
+                0x3000a488                hal_clear_intpnd
+                0x3000a4ac                hal_add_ihandle
+                0x3000a518                intfltdsc_t_init
+                0x3000a568                init_intfltdsc
+                0x3000a628                init_halintupt
+ .text          0x3000a634      0x174 haluart.o
+                0x3000a634                hal_uart_read
+                0x3000a63c                hal_uart_ioctrl
+                0x3000a644                uart_receive_char
+                0x3000a64c                uart_send_char
+                0x3000a6ac                hal_uart0_putc
+                0x3000a6e0                init_uart0
+                0x3000a72c                init_haluart
+                0x3000a730                hal_uart_write
+ .text          0x3000a7a8       0x18 krlinit.o
+                0x3000a7a8                init_krl
+ .text          0x3000a7c0        0x0 krlglobal.o
+ .text          0x3000a7c0       0xc4 krlintupt.o
+                0x3000a7c0                krldisable_intline
+                0x3000a7d0                krlenable_intline
+                0x3000a7e0                krladd_irqhandle
+ .text          0x3000a884      0x138 krlsem.o
+                0x3000a884                krlsem_set_sem
+                0x3000a8c0                krlsem_up
+                0x3000a92c                krlsem_down
+                0x3000a994                krlsem_t_init
+ .text          0x3000a9bc      0x174 krlwaitlist.o
+                0x3000a9bc                krlwlst_del_thread
+                0x3000aa38                krlwlst_add_thread
+                0x3000aa94                krlwlst_allup
+                0x3000aacc                krlwlst_up
+                0x3000aafc                krlwlst_wait
+                0x3000ab0c                kwlst_t_init
+ .text          0x3000ab30       0x58 krlmm.o
+                0x3000ab30                krldelete
+                0x3000ab5c                krlnew
+                0x3000ab78                init_krlmm
+ .text          0x3000ab88     0x1684 krlpagempol.o
+                0x3000ab88                objs_delete_on_mplhead
+                0x3000abec                objs_new_on_mplhead
+                0x3000ac34                page_delete_on_mplhead
+                0x3000acbc                page_new_on_mplhead
+                0x3000ad00                objsdel_mplhead_isok
+                0x3000ad54                pagedel_mplhead_isok
+                0x3000ada8                objsnew_mplhead_isok
+                0x3000ade8                pagenew_mplhead_isok
+                0x3000ae28                kmemplob_retn_mplhead
+                0x3000aedc                kmempldelob_retn_mplhead
+                0x3000afb8                kmempldelpg_retn_mplhead
+                0x3000b094                kmemplpg_retn_mplhead
+                0x3000b14c                kmempool_page_new_callhalmm
+                0x3000b1d4                cmp_adrsz
+                0x3000b3a0                del_page_mpool
+                0x3000b454                kmempool_pages_core_delete
+                0x3000b4e0                kmempool_page_delete_callhalmm
+                0x3000b568                kmempool_pages_delete
+                0x3000b588                del_objs_mpool
+                0x3000b63c                kmempool_objsz_core_delete
+                0x3000b6c8                kmempool_objsz_delete
+                0x3000b6e4                kmempool_onsize_delete
+                0x3000b6f4                kmempool_delete
+                0x3000b714                mplhead_t_init
+                0x3000b76c                page_mpool_init
+                0x3000b8a0                new_page_mpool
+                0x3000ba5c                kmempool_pages_core_new
+                0x3000bb08                kmempool_pages_new
+                0x3000bb28                objs_mpool_init
+                0x3000bc80                new_objs_mpool
+                0x3000bcec                kmempool_objsz_core_new
+                0x3000bd9c                kmempool_objsz_new
+                0x3000bdb8                kmempool_onsize_new
+                0x3000bdc8                kmempool_new
+                0x3000bde0                kmempool_t_init
+                0x3000be44                init_krlpagempol
+                0x3000be50                testpagemgr
+                0x3000bf78                testobjsmgr
+                0x3000c0b4                testpgmpool
+ .text          0x3000c20c        0x0 krlobjsmpol.o
+ .text          0x3000c20c      0x69c krlsched.o
+                0x3000c20c                thrdlst_t_init
+                0x3000c220                krlretn_thread_id
+                0x3000c224                retnfrom_first_sched
+                0x3000c24c                save_to_new_context
+                0x3000c2c8                __to_new_context
+                0x3000c328                krlschdclass_add_thread
+                0x3000c3d8                krlsched_set_schedflgs
+                0x3000c424                krlsched_retn_idlethread
+                0x3000c464                krlsched_select_thread
+                0x3000c56c                krlsched_retn_currthread
+                0x3000c5ac                krlschedul
+                0x3000c5c8                krlsched_chkneed_pmptsched
+                0x3000c63c                krlsched_up
+                0x3000c70c                krlsched_wait
+                0x3000c808                schdata_t_init
+                0x3000c870                schedclass_t_init
+                0x3000c89c                init_krlsched
+ .text          0x3000c8a8      0x14c krltime.o
+                0x3000c8a8                krlsve_time
+                0x3000c928                krlsvetabl_time
+                0x3000c940                krlupdate_times
+                0x3000c9b0                ktime_t_init
+                0x3000c9e8                init_ktime
+ .text          0x3000c9f4       0xbc krlobjnode.o
+                0x3000c9f4                krldel_objnode
+                0x3000ca24                objnode_t_init
+                0x3000ca90                krlnew_objnode
+ .text          0x3000cab0      0x474 krlthread.o
+                0x3000cab0                micrstk_t_init
+                0x3000cac8                context_t_init
+                0x3000cae4                krlthreadkrlsatck_init
+                0x3000cb60                krlthd_retn_objnode
+                0x3000cbac                krlthd_del_objnode
+                0x3000cc08                krlthd_add_objnode
+                0x3000cc74                krlthd_retn_nullhand
+                0x3000ccd0                krlthd_inc_tick
+                0x3000cd1c                thread_t_init
+                0x3000cdc0                krlnew_thread_dsc
+                0x3000cde0                krlnew_thread_core
+                0x3000cea8                krlnew_thread
+ .text          0x3000cf24      0xa8c krldevice.o
+                0x3000cf24                devtlst_t_init
+                0x3000cf38                devid_t_init
+                0x3000cf40                krlretn_driverid
+                0x3000cf48                drv_defalt_func
+                0x3000cf50                krlcmp_devid
+                0x3000cf90                krldev_add_driver
+                0x3000d024                krldev_wait_intupt
+                0x3000d028                krldev_up_intupt
+                0x3000d02c                krldev_retn_rqueparm
+                0x3000d0a0                krldev_call_driver
+                0x3000d0ec                krldev_io
+                0x3000d148                krlnew_devhandle
+                0x3000d1bc                krlonidfl_retn_device
+                0x3000d2a0                krldev_retn_request
+                0x3000d360                krldev_add_request
+                0x3000d3c8                krldev_dec_devcount
+                0x3000d420                krldev_inc_devcount
+                0x3000d474                krlnew_device
+                0x3000d5ac                krldriver_add_system
+                0x3000d618                krldev_wait_request
+                0x3000d648                krldev_complete_request
+                0x3000d6e0                del_device_dsc
+                0x3000d700                del_driver_dsc
+                0x3000d720                devtable_t_init
+                0x3000d798                init_krldevice
+                0x3000d7a4                driver_t_init
+                0x3000d830                new_driver_dsc
+                0x3000d850                krlrun_driverentry
+                0x3000d8a0                init_krldriver
+                0x3000d8f4                device_t_init
+                0x3000d990                new_device_dsc
+ .text          0x3000d9b0       0x20 krlservice.o
+                0x3000d9b0                krlservice
+ .text          0x3000d9d0       0x98 krlsvemm.o
+                0x3000d9d0                krlsve_core_mfreeblk
+                0x3000d9f4                krlsve_mfreeblk
+                0x3000da0c                krlsvetabl_mfreeblk
+                0x3000da2c                krlsve_core_mallocblk
+                0x3000da3c                krlsve_mallocblk
+                0x3000da50                krlsvetabl_mallocblk
+ .text          0x3000da68       0x74 krlsvethread.o
+                0x3000da68                krlsvetabl_exel_thread
+                0x3000da70                krlsvetabl_exit_thread
+                0x3000da78                krlsvetabl_retn_threadhand
+                0x3000da80                krlsvetabl_retn_threadstats
+                0x3000da88                krlsvetabl_set_threadstats
+                0x3000da90                krlsve_exel_thread
+                0x3000da98                krlsve_exit_thread
+                0x3000daa0                krlsve_retn_threadhand
+                0x3000daa8                krlsve_retn_threadstats
+                0x3000dab0                krlsve_set_threadstats
+                0x3000dab8                krlsve_core_exel_thread
+                0x3000dac0                krlsve_core_exit_thread
+                0x3000dac4                krlsve_core_retn_threadhand
+                0x3000dacc                krlsve_core_retn_threadstats
+                0x3000dad4                krlsve_core_set_threadstats
+ .text          0x3000dadc      0x16c krlsveopen.o
+                0x3000dadc                krlsve_open_device
+                0x3000db0c                krlsve_core_open
+                0x3000dc10                krlsve_open
+                0x3000dc2c                krlsvetabl_open
+ .text          0x3000dc48       0xf0 krlsveclose.o
+                0x3000dc48                krlsve_close_device
+                0x3000dc78                krlsve_core_close
+                0x3000dd0c                krlsve_close
+                0x3000dd20                krlsvetabl_close
+ .text          0x3000dd38       0xd4 krlsveread.o
+                0x3000dd38                krlsve_read_device
+                0x3000dd68                krlsve_core_read
+                0x3000ddc4                krlsve_read
+                0x3000dde4                krlsvetabl_read
+ .text          0x3000de0c       0xe4 krlsvewrite.o
+                0x3000de0c                krlsve_write_device
+                0x3000de3c                krlsve_core_write
+                0x3000de98                krlsve_write
+                0x3000dec8                krlsvetabl_write
+ .text          0x3000def0       0xcc krlsveioctrl.o
+                0x3000def0                krlsve_ioctrl_device
+                0x3000df20                krlsve_core_ioctrl
+                0x3000df7c                krlsve_ioctrl
+                0x3000df94                krlsvetabl_ioctrl
+ .text          0x3000dfbc       0x18 krlsvelseek.o
+                0x3000dfbc                krlsvetabl_lseek
+                0x3000dfc4                krlsve_lseek
+                0x3000dfcc                krlsve_core_lseek
+ .text          0x3000dfd4      0x170 krlcpuidle.o
+                0x3000dfd4                krlcpuidle_main
+                0x3000dfec                new_cpuidle_thread
+                0x3000e0c0                new_cpuidle
+                0x3000e104                krlcpuidle_start
+                0x3000e134                init_krlcpuidle
+ .text          0x3000e144       0xb0 task.o
+                0x3000e144                task1
+                0x3000e194                task0
+                0x3000e1e4                init_task
+ .text          0x3000e1f4      0x340 drvtick.o
+                0x3000e1f4                systick_set_driver
+                0x3000e294                systick_set_device
+                0x3000e2c8                systick_exit
+                0x3000e2d0                systick_open
+                0x3000e2d8                systick_close
+                0x3000e2e0                systick_read
+                0x3000e2e8                systick_write
+                0x3000e2f0                systick_lseek
+                0x3000e2f8                systick_ioctrl
+                0x3000e300                systick_dev_start
+                0x3000e308                systick_dev_stop
+                0x3000e310                systick_set_powerstus
+                0x3000e318                systick_enum_dev
+                0x3000e320                systick_flush
+                0x3000e328                systick_shutdown
+                0x3000e330                systick_handle
+                0x3000e34c                init_s3c2440_timer4
+                0x3000e3d4                systick_entry
+ .text          0x3000e534      0x448 drvuart.o
+                0x3000e534                uart_set_driver
+                0x3000e5d4                uart0_set_device
+                0x3000e608                uart_exit
+                0x3000e610                uart_read
+                0x3000e618                uart_lseek
+                0x3000e620                uart_ioctrl
+                0x3000e628                uart_dev_start
+                0x3000e630                uart_dev_stop
+                0x3000e638                uart_set_powerstus
+                0x3000e640                uart_enum_dev
+                0x3000e648                uart_flush
+                0x3000e650                uart_shutdown
+                0x3000e658                uartdev_send_char
+                0x3000e6b8                init_devuart0
+                0x3000e704                uart_write
+                0x3000e780                uart_close
+                0x3000e790                uart_open
+                0x3000e7a0                uart0_err_handle
+                0x3000e7bc                uart0_txd_handle
+                0x3000e7d8                uart0_rxd_handle
+                0x3000e7f4                uart_entry
+ .text          0x3000e97c      0xa10 drvrtc.o
+                0x3000e97c                rtc_set_driver
+                0x3000ea1c                rtc_set_device
+                0x3000ea50                rtc_exit
+                0x3000ea58                rtc_write
+                0x3000ea60                rtc_lseek
+                0x3000ea68                rtc_dev_start
+                0x3000ea70                rtc_dev_stop
+                0x3000ea78                rtc_set_powerstus
+                0x3000ea80                rtc_enum_dev
+                0x3000ea88                rtc_flush
+                0x3000ea90                rtc_shutdown
+                0x3000ea98                rtc_upfreq
+                0x3000eacc                rtc_setime
+                0x3000ec78                init_rtc
+                0x3000eca0                rtc_read
+                0x3000ee30                rtc_set_synsecalm
+                0x3000efb0                rtc_ioctrl
+                0x3000f060                rtc_close
+                0x3000f070                rtc_open
+                0x3000f080                rtc_tick_handle
+                0x3000f18c                rtc_handle
+                0x3000f200                rtc_entry
+ .text          0x3000f38c       0x58 lapimm.o
+                0x3000f38c                api_mallocblk
+                0x3000f3b4                api_mfreeblk
+ .text          0x3000f3e4       0xfc lapithread.o
+                0x3000f3e4                api_exel_thread
+                0x3000f414                api_exit_thread
+                0x3000f438                api_retn_threadhand
+                0x3000f460                api_retn_threadstats
+                0x3000f4a0                api_set_threadstats
+ .text          0x3000f4e0       0x38 lapiopen.o
+                0x3000f4e0                api_open
+ .text          0x3000f518       0x28 lapiclose.o
+                0x3000f518                api_close
+ .text          0x3000f540       0x40 lapiread.o
+                0x3000f540                api_read
+ .text          0x3000f580       0x40 lapiwrite.o
+                0x3000f580                api_write
+ .text          0x3000f5c0       0x40 lapiioctrl.o
+                0x3000f5c0                api_ioctrl
+ .text          0x3000f600       0x38 lapilseek.o
+                0x3000f600                api_lseek
+ .text          0x3000f638       0x28 lapitime.o
+                0x3000f638                api_time
+ .text          0x3000f660       0x20 libmm.o
+                0x3000f660                mfreeblk
+                0x3000f670                mallocblk
+ .text          0x3000f680       0x50 libthread.o
+                0x3000f680                set_threadstats
+                0x3000f690                retn_threadstats
+                0x3000f6a0                pid
+                0x3000f6b0                exit
+                0x3000f6c0                exel
+ .text          0x3000f6d0       0x10 libopen.o
+                0x3000f6d0                open
+ .text          0x3000f6e0       0x10 libclose.o
+                0x3000f6e0                close
+ .text          0x3000f6f0       0x10 libread.o
+                0x3000f6f0                read
+ .text          0x3000f700       0x10 libwrite.o
+                0x3000f700                write
+ .text          0x3000f710       0x10 libioctrl.o
+                0x3000f710                ioctrl
+ .text          0x3000f720       0x10 liblseek.o
+                0x3000f720                lseek
+ .text          0x3000f730      0x160 libtime.o
+                0x3000f730                synsecalarm
+                0x3000f7a8                settime
+                0x3000f814                gettime
+                0x3000f880                time
+ .text          0x3000f890      0x260 printf.o
+                0x3000f890                strlen
+                0x3000f8bc                strcopy
+                0x3000f8dc                number
+                0x3000f960                vsprintf
+                0x3000fa18                printf
+ .text          0x3000faf0       0xf4 utask.o
+                0x3000faf0                task0_main
+                0x3000fb84                task1_main
+                0x3000fbe4                __end_text = .
+                0x3000fbe4                __begin_data = .
+
+.glue_7         0x3000fbe4        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x3000fbe4        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x3000fbe4        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x3000fbe4        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.data           0x3000fbe4     0x1504
+ *(.data)
+ .data          0x3000fbe4        0x0 init.o
+ .data          0x3000fbe4        0x0 lmosemhal_start.o
+ .data          0x3000fbe4        0x0 interrupt.o
+ .data          0x3000fbe4        0x4 intabtdistr.o
+                0x3000fbe4                gint_indx
+ .data          0x3000fbe8      0xdf0 halglobal.o
+                0x3000fbe8                machadrspce
+                0x3000fdb8                osmach
+                0x3000fdec                osphymem
+                0x3000fec0                machintflt
+ .data          0x300109d8        0x0 halinit.o
+ .data          0x300109d8        0x0 vector.o
+ .data          0x300109d8        0x0 platform.o
+ .data          0x300109d8        0x0 printfk.o
+ .data          0x300109d8        0x0 div0.krnl
+ .data          0x300109d8        0x0 _udivsi3.o
+ .data          0x300109d8        0x0 _umodsi3.o
+ .data          0x300109d8        0x0 _modsi3.o
+ .data          0x300109d8        0x0 _divsi3.o
+ .data          0x300109d8        0x0 cpuctrl.o
+ .data          0x300109d8        0x0 halmmu.o
+ .data          0x300109d8        0x0 halmach.o
+ .data          0x300109d8        0x0 halmm.o
+ .data          0x300109d8        0x0 halintupt.o
+ .data          0x300109d8        0x0 haluart.o
+ .data          0x300109d8        0x0 krlinit.o
+ .data          0x300109d8      0x710 krlglobal.o
+                0x300109d8                osscalltab
+                0x30010a14                osdrvetytabl
+                0x30010a24                oskmempool
+                0x30010a60                osschedcls
+                0x30010e90                osktime
+                0x30010eb4                osdevtable
+ .data          0x300110e8        0x0 krlintupt.o
+ .data          0x300110e8        0x0 krlsem.o
+ .data          0x300110e8        0x0 krlwaitlist.o
+ .data          0x300110e8        0x0 krlmm.o
+ .data          0x300110e8        0x0 krlpagempol.o
+ .data          0x300110e8        0x0 krlobjsmpol.o
+ .data          0x300110e8        0x0 krlsched.o
+ .data          0x300110e8        0x0 krltime.o
+ .data          0x300110e8        0x0 krlobjnode.o
+ .data          0x300110e8        0x0 krlthread.o
+ .data          0x300110e8        0x0 krldevice.o
+ .data          0x300110e8        0x0 krlservice.o
+ .data          0x300110e8        0x0 krlsvemm.o
+ .data          0x300110e8        0x0 krlsvethread.o
+ .data          0x300110e8        0x0 krlsveopen.o
+ .data          0x300110e8        0x0 krlsveclose.o
+ .data          0x300110e8        0x0 krlsveread.o
+ .data          0x300110e8        0x0 krlsvewrite.o
+ .data          0x300110e8        0x0 krlsveioctrl.o
+ .data          0x300110e8        0x0 krlsvelseek.o
+ .data          0x300110e8        0x0 krlcpuidle.o
+ .data          0x300110e8        0x0 task.o
+ .data          0x300110e8        0x0 drvtick.o
+ .data          0x300110e8        0x0 drvuart.o
+ .data          0x300110e8        0x0 drvrtc.o
+ .data          0x300110e8        0x0 lapimm.o
+ .data          0x300110e8        0x0 lapithread.o
+ .data          0x300110e8        0x0 lapiopen.o
+ .data          0x300110e8        0x0 lapiclose.o
+ .data          0x300110e8        0x0 lapiread.o
+ .data          0x300110e8        0x0 lapiwrite.o
+ .data          0x300110e8        0x0 lapiioctrl.o
+ .data          0x300110e8        0x0 lapilseek.o
+ .data          0x300110e8        0x0 lapitime.o
+ .data          0x300110e8        0x0 libmm.o
+ .data          0x300110e8        0x0 libthread.o
+ .data          0x300110e8        0x0 libopen.o
+ .data          0x300110e8        0x0 libclose.o
+ .data          0x300110e8        0x0 libread.o
+ .data          0x300110e8        0x0 libwrite.o
+ .data          0x300110e8        0x0 libioctrl.o
+ .data          0x300110e8        0x0 liblseek.o
+ .data          0x300110e8        0x0 libtime.o
+ .data          0x300110e8        0x0 printf.o
+ .data          0x300110e8        0x0 utask.o
+                0x300110e8                __end_data = .
+                0x300110e8                __begin_rodata = .
+
+.rodata         0x300110e8      0xabc
+ *(.rodata)
+ *(.rodata.*)
+ .rodata.str1.4
+                0x300110e8      0x23b intabtdistr.o
+                                0x23c (size before relaxing)
+ *fill*         0x30011323        0x1 00
+ .rodata.str1.4
+                0x30011324       0x11 printfk.o
+                                 0x14 (size before relaxing)
+ *fill*         0x30011335        0x3 00
+ .rodata.str1.4
+                0x30011338        0xb div0.krnl
+                                  0xc (size before relaxing)
+ *fill*         0x30011343        0x1 00
+ .rodata.str1.4
+                0x30011344       0x18 cpuctrl.o
+ .rodata.str1.4
+                0x3001135c       0x96 halmach.o
+                                 0x98 (size before relaxing)
+ *fill*         0x300113f2        0x2 00
+ .rodata.str1.4
+                0x300113f4      0x169 halmm.o
+                                0x16c (size before relaxing)
+ *fill*         0x3001155d        0x3 00
+ .rodata.str1.4
+                0x30011560       0x10 halintupt.o
+ .rodata.str1.4
+                0x30011570        0x9 haluart.o
+                                  0xc (size before relaxing)
+ *fill*         0x30011579        0x3 00
+ .rodata.str1.4
+                0x3001157c       0x15 krlintupt.o
+                                 0x18 (size before relaxing)
+ *fill*         0x30011591        0x3 00
+ .rodata.str1.4
+                0x30011594        0xb krlsem.o
+                                  0xc (size before relaxing)
+ *fill*         0x3001159f        0x1 00
+ .rodata.str1.4
+                0x300115a0      0x327 krlpagempol.o
+                                0x340 (size before relaxing)
+ *fill*         0x300118c7        0x1 00
+ .rodata.str1.4
+                0x300118c8       0x56 krlsched.o
+                                 0x58 (size before relaxing)
+ *fill*         0x3001191e        0x2 00
+ .rodata.str1.4
+                0x30011920       0x13 krlobjnode.o
+                                 0x14 (size before relaxing)
+ *fill*         0x30011933        0x1 00
+ .rodata.str1.4
+                0x30011934       0x40 krldevice.o
+ .rodata.str1.4
+                0x30011974       0x19 krlsvemm.o
+                                 0x1c (size before relaxing)
+ *fill*         0x3001198d        0x3 00
+ .rodata.str1.4
+                0x30011990       0x4d krlsveopen.o
+                                 0x50 (size before relaxing)
+ *fill*         0x300119dd        0x3 00
+ .rodata.str1.4
+                0x300119e0       0x3a krlsveclose.o
+                                 0x3c (size before relaxing)
+ *fill*         0x30011a1a        0x2 00
+ .rodata.str1.4
+                0x30011a1c       0x36 krlcpuidle.o
+                                 0x38 (size before relaxing)
+ *fill*         0x30011a52        0x2 00
+ .rodata.str1.4
+                0x30011a54       0x16 task.o
+                                 0x18 (size before relaxing)
+ *fill*         0x30011a6a        0x2 00
+ .rodata.str1.4
+                0x30011a6c       0x2f drvtick.o
+                                 0x30 (size before relaxing)
+ *fill*         0x30011a9b        0x1 00
+ .rodata.str1.4
+                0x30011a9c       0x49 drvuart.o
+                                 0x4c (size before relaxing)
+ *fill*         0x30011ae5        0x3 00
+ .rodata.str1.4
+                0x30011ae8       0x69 drvrtc.o
+                                 0x6c (size before relaxing)
+ .rodata.str1.4
+                0x00000000       0x14 printf.o
+ *fill*         0x30011b51        0x3 00
+ .rodata.str1.4
+                0x30011b54       0x50 utask.o
+                0x30011ba4                __end_rodata = .
+                0x30011ba4                __begin_kstrtab = .
+
+.kstrtab
+ *(.kstrtab)
+                0x30011ba4                __end_kstrtab = .
+                0x30011ba4                __begin_bss = .
+
+.bss            0x30011ba4        0x0
+ *(.bss)
+ .bss           0x30011ba4        0x0 init.o
+ .bss           0x30011ba4        0x0 lmosemhal_start.o
+ .bss           0x30011ba4        0x0 interrupt.o
+ .bss           0x30011ba4        0x0 intabtdistr.o
+ .bss           0x30011ba4        0x0 halglobal.o
+ .bss           0x30011ba4        0x0 halinit.o
+ .bss           0x30011ba4        0x0 vector.o
+ .bss           0x30011ba4        0x0 platform.o
+ .bss           0x30011ba4        0x0 printfk.o
+ .bss           0x30011ba4        0x0 div0.krnl
+ .bss           0x30011ba4        0x0 _udivsi3.o
+ .bss           0x30011ba4        0x0 _umodsi3.o
+ .bss           0x30011ba4        0x0 _modsi3.o
+ .bss           0x30011ba4        0x0 _divsi3.o
+ .bss           0x30011ba4        0x0 cpuctrl.o
+ .bss           0x30011ba4        0x0 halmmu.o
+ .bss           0x30011ba4        0x0 halmach.o
+ .bss           0x30011ba4        0x0 halmm.o
+ .bss           0x30011ba4        0x0 halintupt.o
+ .bss           0x30011ba4        0x0 haluart.o
+ .bss           0x30011ba4        0x0 krlinit.o
+ .bss           0x30011ba4        0x0 krlglobal.o
+ .bss           0x30011ba4        0x0 krlintupt.o
+ .bss           0x30011ba4        0x0 krlsem.o
+ .bss           0x30011ba4        0x0 krlwaitlist.o
+ .bss           0x30011ba4        0x0 krlmm.o
+ .bss           0x30011ba4        0x0 krlpagempol.o
+ .bss           0x30011ba4        0x0 krlobjsmpol.o
+ .bss           0x30011ba4        0x0 krlsched.o
+ .bss           0x30011ba4        0x0 krltime.o
+ .bss           0x30011ba4        0x0 krlobjnode.o
+ .bss           0x30011ba4        0x0 krlthread.o
+ .bss           0x30011ba4        0x0 krldevice.o
+ .bss           0x30011ba4        0x0 krlservice.o
+ .bss           0x30011ba4        0x0 krlsvemm.o
+ .bss           0x30011ba4        0x0 krlsvethread.o
+ .bss           0x30011ba4        0x0 krlsveopen.o
+ .bss           0x30011ba4        0x0 krlsveclose.o
+ .bss           0x30011ba4        0x0 krlsveread.o
+ .bss           0x30011ba4        0x0 krlsvewrite.o
+ .bss           0x30011ba4        0x0 krlsveioctrl.o
+ .bss           0x30011ba4        0x0 krlsvelseek.o
+ .bss           0x30011ba4        0x0 krlcpuidle.o
+ .bss           0x30011ba4        0x0 task.o
+ .bss           0x30011ba4        0x0 drvtick.o
+ .bss           0x30011ba4        0x0 drvuart.o
+ .bss           0x30011ba4        0x0 drvrtc.o
+ .bss           0x30011ba4        0x0 lapimm.o
+ .bss           0x30011ba4        0x0 lapithread.o
+ .bss           0x30011ba4        0x0 lapiopen.o
+ .bss           0x30011ba4        0x0 lapiclose.o
+ .bss           0x30011ba4        0x0 lapiread.o
+ .bss           0x30011ba4        0x0 lapiwrite.o
+ .bss           0x30011ba4        0x0 lapiioctrl.o
+ .bss           0x30011ba4        0x0 lapilseek.o
+ .bss           0x30011ba4        0x0 lapitime.o
+ .bss           0x30011ba4        0x0 libmm.o
+ .bss           0x30011ba4        0x0 libthread.o
+ .bss           0x30011ba4        0x0 libopen.o
+ .bss           0x30011ba4        0x0 libclose.o
+ .bss           0x30011ba4        0x0 libread.o
+ .bss           0x30011ba4        0x0 libwrite.o
+ .bss           0x30011ba4        0x0 libioctrl.o
+ .bss           0x30011ba4        0x0 liblseek.o
+ .bss           0x30011ba4        0x0 libtime.o
+ .bss           0x30011ba4        0x0 printf.o
+ .bss           0x30011ba4        0x0 utask.o
+                0x30011ba4                __end_bss = .
+                0x30011ba4                __end_kernel = .
+
+/DISCARD/
+ *(.dynstr*)
+ *(.dynamic*)
+ *(.plt*)
+ *(.interp*)
+ *(.gnu*)
+OUTPUT(lmosemkrnl.elf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x25
+ .ARM.attributes
+                0x00000000       0x17 init.o
+ .ARM.attributes
+                0x00000017       0x29 lmosemhal_start.o
+ .ARM.attributes
+                0x00000040       0x17 interrupt.o
+ .ARM.attributes
+                0x00000057       0x29 intabtdistr.o
+ .ARM.attributes
+                0x00000080       0x27 halglobal.o
+ .ARM.attributes
+                0x000000a7       0x27 halinit.o
+ .ARM.attributes
+                0x000000ce       0x17 vector.o
+ .ARM.attributes
+                0x000000e5       0x29 platform.o
+ .ARM.attributes
+                0x0000010e       0x29 printfk.o
+ .ARM.attributes
+                0x00000137       0x29 div0.krnl
+ .ARM.attributes
+                0x00000160       0x17 _udivsi3.o
+ .ARM.attributes
+                0x00000177       0x17 _umodsi3.o
+ .ARM.attributes
+                0x0000018e       0x17 _modsi3.o
+ .ARM.attributes
+                0x000001a5       0x17 _divsi3.o
+ .ARM.attributes
+                0x000001bc       0x29 cpuctrl.o
+ .ARM.attributes
+                0x000001e5       0x29 halmmu.o
+ .ARM.attributes
+                0x0000020e       0x29 halmach.o
+ .ARM.attributes
+                0x00000237       0x29 halmm.o
+ .ARM.attributes
+                0x00000260       0x29 halintupt.o
+ .ARM.attributes
+                0x00000289       0x29 haluart.o
+ .ARM.attributes
+                0x000002b2       0x27 krlinit.o
+ .ARM.attributes
+                0x000002d9       0x27 krlglobal.o
+ .ARM.attributes
+                0x00000300       0x29 krlintupt.o
+ .ARM.attributes
+                0x00000329       0x29 krlsem.o
+ .ARM.attributes
+                0x00000352       0x29 krlwaitlist.o
+ .ARM.attributes
+                0x0000037b       0x29 krlmm.o
+ .ARM.attributes
+                0x000003a4       0x29 krlpagempol.o
+ .ARM.attributes
+                0x000003cd       0x27 krlobjsmpol.o
+ .ARM.attributes
+                0x000003f4       0x29 krlsched.o
+ .ARM.attributes
+                0x0000041d       0x29 krltime.o
+ .ARM.attributes
+                0x00000446       0x29 krlobjnode.o
+ .ARM.attributes
+                0x0000046f       0x29 krlthread.o
+ .ARM.attributes
+                0x00000498       0x29 krldevice.o
+ .ARM.attributes
+                0x000004c1       0x29 krlservice.o
+ .ARM.attributes
+                0x000004ea       0x29 krlsvemm.o
+ .ARM.attributes
+                0x00000513       0x29 krlsvethread.o
+ .ARM.attributes
+                0x0000053c       0x29 krlsveopen.o
+ .ARM.attributes
+                0x00000565       0x29 krlsveclose.o
+ .ARM.attributes
+                0x0000058e       0x29 krlsveread.o
+ .ARM.attributes
+                0x000005b7       0x29 krlsvewrite.o
+ .ARM.attributes
+                0x000005e0       0x29 krlsveioctrl.o
+ .ARM.attributes
+                0x00000609       0x29 krlsvelseek.o
+ .ARM.attributes
+                0x00000632       0x29 krlcpuidle.o
+ .ARM.attributes
+                0x0000065b       0x29 task.o
+ .ARM.attributes
+                0x00000684       0x29 drvtick.o
+ .ARM.attributes
+                0x000006ad       0x29 drvuart.o
+ .ARM.attributes
+                0x000006d6       0x29 drvrtc.o
+ .ARM.attributes
+                0x000006ff       0x29 lapimm.o
+ .ARM.attributes
+                0x00000728       0x29 lapithread.o
+ .ARM.attributes
+                0x00000751       0x29 lapiopen.o
+ .ARM.attributes
+                0x0000077a       0x29 lapiclose.o
+ .ARM.attributes
+                0x000007a3       0x29 lapiread.o
+ .ARM.attributes
+                0x000007cc       0x29 lapiwrite.o
+ .ARM.attributes
+                0x000007f5       0x29 lapiioctrl.o
+ .ARM.attributes
+                0x0000081e       0x29 lapilseek.o
+ .ARM.attributes
+                0x00000847       0x29 lapitime.o
+ .ARM.attributes
+                0x00000870       0x29 libmm.o
+ .ARM.attributes
+                0x00000899       0x29 libthread.o
+ .ARM.attributes
+                0x000008c2       0x29 libopen.o
+ .ARM.attributes
+                0x000008eb       0x29 libclose.o
+ .ARM.attributes
+                0x00000914       0x29 libread.o
+ .ARM.attributes
+                0x0000093d       0x29 libwrite.o
+ .ARM.attributes
+                0x00000966       0x29 libioctrl.o
+ .ARM.attributes
+                0x0000098f       0x29 liblseek.o
+ .ARM.attributes
+                0x000009b8       0x29 libtime.o
+ .ARM.attributes
+                0x000009e1       0x29 printf.o
+ .ARM.attributes
+                0x00000a0a       0x27 utask.o
+
+.note.GNU-stack
+                0x00000000        0x0
+ .note.GNU-stack
+                0x00000000        0x0 lmosemhal_start.o
+ .note.GNU-stack
+                0x00000000        0x0 intabtdistr.o
+ .note.GNU-stack
+                0x00000000        0x0 halglobal.o
+ .note.GNU-stack
+                0x00000000        0x0 halinit.o
+ .note.GNU-stack
+                0x00000000        0x0 platform.o
+ .note.GNU-stack
+                0x00000000        0x0 printfk.o
+ .note.GNU-stack
+                0x00000000        0x0 div0.krnl
+ .note.GNU-stack
+                0x00000000        0x0 cpuctrl.o
+ .note.GNU-stack
+                0x00000000        0x0 halmmu.o
+ .note.GNU-stack
+                0x00000000        0x0 halmach.o
+ .note.GNU-stack
+                0x00000000        0x0 halmm.o
+ .note.GNU-stack
+                0x00000000        0x0 halintupt.o
+ .note.GNU-stack
+                0x00000000        0x0 haluart.o
+ .note.GNU-stack
+                0x00000000        0x0 krlinit.o
+ .note.GNU-stack
+                0x00000000        0x0 krlglobal.o
+ .note.GNU-stack
+                0x00000000        0x0 krlintupt.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsem.o
+ .note.GNU-stack
+                0x00000000        0x0 krlwaitlist.o
+ .note.GNU-stack
+                0x00000000        0x0 krlmm.o
+ .note.GNU-stack
+                0x00000000        0x0 krlpagempol.o
+ .note.GNU-stack
+                0x00000000        0x0 krlobjsmpol.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsched.o
+ .note.GNU-stack
+                0x00000000        0x0 krltime.o
+ .note.GNU-stack
+                0x00000000        0x0 krlobjnode.o
+ .note.GNU-stack
+                0x00000000        0x0 krlthread.o
+ .note.GNU-stack
+                0x00000000        0x0 krldevice.o
+ .note.GNU-stack
+                0x00000000        0x0 krlservice.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsvemm.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsvethread.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsveopen.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsveclose.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsveread.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsvewrite.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsveioctrl.o
+ .note.GNU-stack
+                0x00000000        0x0 krlsvelseek.o
+ .note.GNU-stack
+                0x00000000        0x0 krlcpuidle.o
+ .note.GNU-stack
+                0x00000000        0x0 task.o
+ .note.GNU-stack
+                0x00000000        0x0 drvtick.o
+ .note.GNU-stack
+                0x00000000        0x0 drvuart.o
+ .note.GNU-stack
+                0x00000000        0x0 drvrtc.o
+ .note.GNU-stack
+                0x00000000        0x0 lapimm.o
+ .note.GNU-stack
+                0x00000000        0x0 lapithread.o
+ .note.GNU-stack
+                0x00000000        0x0 lapiopen.o
+ .note.GNU-stack
+                0x00000000        0x0 lapiclose.o
+ .note.GNU-stack
+                0x00000000        0x0 lapiread.o
+ .note.GNU-stack
+                0x00000000        0x0 lapiwrite.o
+ .note.GNU-stack
+                0x00000000        0x0 lapiioctrl.o
+ .note.GNU-stack
+                0x00000000        0x0 lapilseek.o
+ .note.GNU-stack
+                0x00000000        0x0 lapitime.o
+ .note.GNU-stack
+                0x00000000        0x0 libmm.o
+ .note.GNU-stack
+                0x00000000        0x0 libthread.o
+ .note.GNU-stack
+                0x00000000        0x0 libopen.o
+ .note.GNU-stack
+                0x00000000        0x0 libclose.o
+ .note.GNU-stack
+                0x00000000        0x0 libread.o
+ .note.GNU-stack
+                0x00000000        0x0 libwrite.o
+ .note.GNU-stack
+                0x00000000        0x0 libioctrl.o
+ .note.GNU-stack
+                0x00000000        0x0 liblseek.o
+ .note.GNU-stack
+                0x00000000        0x0 libtime.o
+ .note.GNU-stack
+                0x00000000        0x0 printf.o
+ .note.GNU-stack
+                0x00000000        0x0 utask.o
